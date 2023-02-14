@@ -14,26 +14,15 @@ class Main_page(Base):
         self.driver = driver
 
 
-    url = 'https://www.dns-shop.ru/'
+    url = 'https://doctorslon.ru/'
 
 
     # Локаторы
-    login = (By.XPATH, "//*[@class='personal-block-desktop']//*[@class='base-ui-button-v2__text']")
-    search = (By.XPATH, "//*[@class='presearch__input']")
+
 
     # Методы
-    def click_login(self):
-        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.login))
-        _login = self.driver.find_element(*self.login)
-        _login.click()
-        print("Click login button")
 
-    def search_product(self, product):
-        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
-        _search = self.driver.find_element(*self.search)
-        _search.send_keys(product)
-        _search.send_keys(Keys.RETURN)
-        print("Search product")
 
-    def authorization(self):
+
+    def open_main_link(self):
         self.driver.get(self.url)

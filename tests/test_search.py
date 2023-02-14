@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from pages_and_components.components.login_component import Login_component
+from pages_and_components.components.header_component import Login_component
 from pages_and_components.pages.main_page import Main_page
 from pages_and_components.pages.product_page import Product_page
 

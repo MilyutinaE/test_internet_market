@@ -10,24 +10,22 @@ class Product_page(Base):
         super().__init__(driver)
         self.driver = driver
 
-    # Локаторы
-    product_name = (By.XPATH, "//*[@class='product-card-top__title']")
-    buy_button = (By.XPATH, "//*[@class='product-card-top__buy']//*[contains(text(),'Купить')]")
+        # Локаторы
+        self.product_name = (By.XPATH, "//*[@class='product-title']//*[@itemprop='name']")
+        self.wait_for_loading
 
-    # Методы
     def get_product_name(self):
         WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.product_name))
         _product_name = self.driver.find_element(*self.product_name).text
-
         return _product_name
 
-    # Метод, который проверяет, что продукт, который искали, соответствует продукту, на страниц
-    def is_product_right(self, product_name, product_search):
-        product_right = product_search in product_name
-        return product_right
+    def checkout_click(self):
+        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.checkout_button))
+        _checkout_button = self.driver.find_element(*self.checkout_button)
+        _checkout_button.click()
+        print("Click checkout (Перейти к оформлению заказ)  ")
 
-    def buy_product(self):
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.buy_button))
-        _buy_product = self.driver.find_element(*self.buy_button)
-        _buy_product.click()
-        print("Click buy button")
+    def wait_for_loading(self):
+        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.product_name))
+
+
