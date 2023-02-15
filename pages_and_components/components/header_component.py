@@ -13,6 +13,7 @@ class Header_component(Base):
         self.login = (By.XPATH, "//*[@class='header-main ']//*[@data-popup='phone']")
         self.search = (By.XPATH, "//*[@id='title-search-input']")
         self.all_results_button = (By.XPATH, "//*[@class='icon icon-search']")
+        self.cart = (By.XPATH, "//*[@class='header-main ']//li[@data-popover='cart']")
         self.wait_for_loading
 
 
@@ -33,6 +34,12 @@ class Header_component(Base):
         _search_all.click()
 
         print("Find products in search")
+
+    def click_cart(self):
+        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.cart))
+        _cart = self.driver.find_element(*self.cart)
+        _cart.click()
+        print("Click cart (Корзина)")
 
     def wait_for_loading(self):
         WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.login))

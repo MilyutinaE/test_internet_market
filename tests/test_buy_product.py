@@ -1,19 +1,17 @@
-import time
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver import ActionChains
-
 from pages_and_components.components.header_component import Header_component
 from pages_and_components.components.login_registration_component import Login_registration_component
-from pages_and_components.components.cart_component import Cart_component
 from pages_and_components.pages.main_page import Main_page
+from pages_and_components.pages.order_page import Order_page
 from pages_and_components.pages.product_page import Product_page
-from pages_and_components.pages.catalog_page import Catalog_page
-def test_buy_product():
+from pages_and_components.pages.catalog_search_page import Catalog_search_page
+
+
+# Открывается сайт, в  поиске ищется товар, далее выбирается первый товар из найденных. открываем его и смотрим,
+# совпадает ли название товара, который искали. потом кладем его в корзину, открываем корзину и переходим к оформлению
+def test_buy_product(set_up):
     options = webdriver.ChromeOptions()
     options.add_experimental_option("detach", True)
     g = Service('D:\\pythonProject\\chromedriver.exe')
@@ -40,10 +38,10 @@ def test_buy_product():
     product_for_search = 'curaprox enzycal 1450'
 
     header.input_search(product_for_search)
-    driver.refresh()
+    driver.refresh() # без рефреша в автотесте не работает поиск
 
-    catalog = Catalog_page(driver)
-    catalog.first_product_click()
+    catalog_search = Catalog_search_page(driver)
+    catalog_search.first_product_click()
 
     product = Product_page(driver)
     product_name = product.get_product_name().lower()
@@ -53,13 +51,17 @@ def test_buy_product():
     assert product_name_correct == True
     print("Correct product name (продукт, который мы искали, совпадает с тем, который мы нашли")
 
+    product.add_to_cart()
 
+    product_name_popup = product.get_product_name_popup().lower()
+    product_name_popup_correct = product_name in product_name_popup
+    assert product_name_popup_correct == True
+    print("Correct product name in popup (Название продукта на странице продукта совпадает с названием в модалке")
 
-    # product = Product_page(driver)
-    #
-    # product.buy_product()
-    #
-    # cart = Cart_component(driver)
-    # cart.cart_click()
-    # cart_page = Cart_page(driver)
-    # cart_page.checkout_click()
+    product.make_order_popup()
+
+    order = Order_page(driver)
+    order.make_order()
+
+    driver.close()
+
