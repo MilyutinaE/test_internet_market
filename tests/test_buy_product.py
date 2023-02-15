@@ -26,15 +26,12 @@ def test_buy_product(set_up):
     header.click_login()
 
     login_registration = Login_registration_component(driver)
-    login_registration.click_login_with_password()
 
     # данные для авторизации
     login_user = 'fenova229@bk.ru'
     password_user = 'abebeb1111'
 
-    login_registration.input_email(login_user)
-    login_registration.input_password(password_user)
-    login_registration.click_login_button()
+    login_registration.authorization(login_user, password_user)
 
     # товар для поиска
     product_for_search = 'curaprox enzycal 1450'

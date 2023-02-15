@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
+from utilites.logger import Logger
 
 
 class Login_registration_component(Base):
@@ -43,3 +44,11 @@ class Login_registration_component(Base):
 
     def wait_for_loading(self):
         WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.login_with_password))
+
+    def authorization(self, login_user, password_user):
+        Logger.add_start_step(method="authorization")
+        self.click_login_with_password()
+        self.input_email(login_user)
+        self.input_password(password_user)
+        self.click_login_button()
+        Logger.add_end_step(url=self.driver.current_url, method="authorization")
