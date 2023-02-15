@@ -23,6 +23,7 @@ def test_items_on_product_page(set_up):
     main = Main_page(driver)
     main.open_main_link()
     main.click_left_menu_toothbrush()
+    time.sleep(2)
     catalog = Catalog_page(driver)
     catalog.product_click()
 

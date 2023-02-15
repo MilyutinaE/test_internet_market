@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -38,6 +40,7 @@ def test_buy_product(set_up):
     product_for_search = 'curaprox enzycal 1450'
 
     header.input_search(product_for_search)
+    time.sleep(2)
     driver.refresh() # без рефреша в автотесте не работает поиск
 
     catalog_search = Catalog_search_page(driver)
