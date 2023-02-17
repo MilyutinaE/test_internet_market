@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -21,9 +22,10 @@ class Product_page(Base):
         self.wait_for_loading
 
     def get_product_name(self):
-        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.product_name))
-        _product_name = self.driver.find_element(*self.product_name).text
-        return _product_name
+        with allure.step("Get product name on product page"):
+            WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.product_name))
+            _product_name = self.driver.find_element(*self.product_name).text
+            return _product_name
 
     def add_to_cart(self):
         WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.add_to_cart_button))
@@ -32,15 +34,17 @@ class Product_page(Base):
         print("Add to cart (Нажать В корзину)")
 
     def get_product_name_popup(self):
-        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.product_popup))
-        _product_name = self.driver.find_element(*self.product_popup).text
-        return _product_name
+        with allure.step("Get product name in popup"):
+            WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.product_popup))
+            _product_name = self.driver.find_element(*self.product_popup).text
+            return _product_name
 
     def make_order_popup(self):
-        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.make_order_popup_button))
-        _make_order_popup_button = self.driver.find_element(*self.make_order_popup_button)
-        _make_order_popup_button.click()
-        print("Click make order in popup (Нажать Оформить заказ в модалке)")
+        with allure.step("Make order in popup"):
+            WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.make_order_popup_button))
+            _make_order_popup_button = self.driver.find_element(*self.make_order_popup_button)
+            _make_order_popup_button.click()
+            print("Click make order in popup (Нажать Оформить заказ в модалке)")
 
     def wait_for_loading(self):
         WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.product_name))

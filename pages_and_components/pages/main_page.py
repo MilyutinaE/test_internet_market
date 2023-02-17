@@ -1,11 +1,9 @@
-import time
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
-from selenium.webdriver import Keys
+import allure
+
 
 
 class Main_page(Base):
@@ -28,4 +26,5 @@ class Main_page(Base):
 
 
     def open_main_link(self):
-        self.driver.get(self.url)
+        with allure.step("Open main page"):
+            self.driver.get(self.url)

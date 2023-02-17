@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -18,22 +19,24 @@ class Header_component(Base):
 
 
     def click_login(self):
-        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.login))
-        _login_button = self.driver.find_element(*self.login)
-        _login_button.click()
-        print("Click login button (Профиль)")
+        with allure.step("Open login"):
+            WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.login))
+            _login_button = self.driver.find_element(*self.login)
+            _login_button.click()
+            print("Click login button (Профиль)")
 
     # Метод - найти товар в поиске
     def input_search(self, product):
-        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
-        _search = self.driver.find_element(*self.search)
-        _search.send_keys(product)
+        with allure.step("Input product in search"):
+            WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
+            _search = self.driver.find_element(*self.search)
+            _search.send_keys(product)
 
-        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.all_results_button))
-        _search_all = self.driver.find_element(*self.all_results_button)
-        _search_all.click()
+            WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.all_results_button))
+            _search_all = self.driver.find_element(*self.all_results_button)
+            _search_all.click()
 
-        print("Find products in search")
+            print("Find products in search")
 
     def click_cart(self):
         WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.cart))

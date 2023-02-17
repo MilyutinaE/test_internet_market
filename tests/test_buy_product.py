@@ -1,6 +1,5 @@
 import time
-
-import pytest
+import allure
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from pages_and_components.components.header_component import Header_component
@@ -11,8 +10,10 @@ from pages_and_components.pages.product_page import Product_page
 from pages_and_components.pages.catalog_search_page import Catalog_search_page
 
 
-# Открывается сайт, в  поиске ищется товар, далее выбирается первый товар из найденных. открываем его и смотрим,
-# совпадает ли название товара, который искали. потом кладем его в корзину, открываем корзину и переходим к оформлению
+@allure.description("test_buy_product- Открывается сайт, в  поиске ищется товар, далее выбирается первый товар из найденных."
+                    " открываем его и смотрим,совпадает ли название товара, который искали. "
+                    "потом кладем его в корзину, открываем корзину и переходим к оформлению")
+
 def test_buy_product(set_up):
     options = webdriver.ChromeOptions()
     options.add_experimental_option("detach", True)
@@ -38,8 +39,8 @@ def test_buy_product(set_up):
 
     header.input_search(product_for_search)
     time.sleep(2)
-    driver.refresh() # без рефреша в автотесте не работает поиск
-
+    driver.refresh() # без рефреша в автотесте не работает поиск. иногда не работает и с ним. нужно водить мышью по экрану
+    driver.refresh()
     catalog_search = Catalog_search_page(driver)
     catalog_search.first_product_click()
 

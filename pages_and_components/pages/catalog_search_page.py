@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -14,13 +15,14 @@ class Catalog_search_page(Base):
         self.wait_for_loading
 
     def first_product_click(self):
-        try:
-            WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.product_in_search))
-            _product = self.driver.find_element(*self.product_in_search)
-            _product.click()
-            print("Click  product")
-        except Exception as ex:
-            print("Товары не найдены")
+        with allure.step("Click on first product in search catalog"):
+            try:
+                WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.product_in_search))
+                _product = self.driver.find_element(*self.product_in_search)
+                _product.click()
+                print("Click  product")
+            except Exception as ex:
+                print("Товары не найдены")
 
     def wait_for_loading(self):
         WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.product_in_search))

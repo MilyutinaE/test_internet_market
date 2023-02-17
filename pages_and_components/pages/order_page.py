@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,10 +16,11 @@ class Order_page(Base):
         self.wait_for_loading
 
     def make_order(self):
-        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.make_order_button))
-        _make_order_button = self.driver.find_element(*self.make_order_button)
-        _make_order_button.click()
-        print("Click make order in order page (Нажать Оформить заказ на странице заказа)")
+        with allure.step("Make order"):
+            WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.make_order_button))
+            _make_order_button = self.driver.find_element(*self.make_order_button)
+            _make_order_button.click()
+            print("Click make order in order page (Нажать Оформить заказ на странице заказа)")
 
 
     def wait_for_loading(self):

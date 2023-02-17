@@ -1,4 +1,6 @@
 import time
+
+import allure
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -12,8 +14,8 @@ from pages_and_components.pages.main_page import Main_page
 from pages_and_components.pages.product_page import Product_page
 
 
-# Открывается сайт, в левом меню клик на категорию, далее открывается первый товар в категории,
-# проверяется есть ли у товара картинка, цена, рейтинг
+@allure.description("test_items_on_product_page - Открывается сайт, в левом меню клик на категорию, далее открывается первый товар в категории, "
+                    "проверяется есть ли у товара картинка, цена, рейтинг")
 def test_items_on_product_page(set_up):
     options = webdriver.ChromeOptions()
     options.add_experimental_option("detach", True)

@@ -153,3 +153,24 @@ def set_group():
     print("Enter system")
     yield
     print("Exit system")
+
+# установить аллюр в терминале пичарма (предварительно скачав его на комп) py -m pip install allure-pytest
+#  сделать директорию для аллюта python -m pytest --alluredir=test_results/ tests/test_buy_product.py - обязательно выполнять в основной директории
+#т.е. мы создаем директорию тест резалтс в нашем проекте, далее указываем путь к тесту
+# выполили тест. далее жмем на нашем проекте copy path (по главной папке). открываем командную строку
+# пишем cd D:\pythonProject. потом пишем allure serve test_results/ и откроется браузер
+# чтобы запустить все тесты пишем в терминале  python -m pytest --alluredir=test_results/
+
+
+# ПИЧАРМ КОМАНДЫ
+# СTRL+лкм по функции - переходит на функцию в коде
+#  быстрый поиск - CTRL+ SHIFT + F
+
+
+#
+#
+#
+#
+#
+#
+#
