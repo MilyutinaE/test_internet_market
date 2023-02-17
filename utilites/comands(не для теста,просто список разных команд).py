@@ -165,8 +165,8 @@ def set_group():
 # ПИЧАРМ КОМАНДЫ
 # СTRL+лкм по функции - переходит на функцию в коде
 #  быстрый поиск - CTRL+ SHIFT + F
+# закомментировать ктрл+/
 
-
 #
 #
 #
@@ -174,3 +174,13 @@ def set_group():
 #
 #
 #
+#
+# ошибки в консоли  SSL error code
+# You get this error when the browser asks you to accept the certificate from a website. You can set to ignore these errors by default in order avoid these errors.
+# For Chrome, you need to add --ignore-certificate-errors and --ignore-ssl-errors ChromeOptions() argument:
+options = webdriver.ChromeOptions()
+options.add_argument('--ignore-certificate-errors')
+options.add_argument('--ignore-ssl-errors')
+driver = webdriver.Chrome(chrome_options=options) # ничего не помогло
+#помогло только так:
+options.add_argument('log-level=3')

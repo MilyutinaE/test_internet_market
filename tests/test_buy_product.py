@@ -1,6 +1,7 @@
 import time
 import allure
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.service import Service
 from pages_and_components.components.header_component import Header_component
 from pages_and_components.components.login_registration_component import Login_registration_component
@@ -16,6 +17,9 @@ from pages_and_components.pages.catalog_search_page import Catalog_search_page
 
 def test_buy_product(set_up):
     options = webdriver.ChromeOptions()
+    options.add_argument('--ignore-certificate-errors-spki-list')
+    options.add_argument('--ignore-ssl-errors')
+    options.add_argument('log-level=3') # чтобы не было ошибок в консоли
     options.add_experimental_option("detach", True)
     g = Service('D:\\pythonProject\\chromedriver.exe')
     driver = webdriver.Chrome(options=options, service=g)
@@ -38,9 +42,10 @@ def test_buy_product(set_up):
     product_for_search = 'curaprox enzycal 1450'
 
     header.input_search(product_for_search)
-    time.sleep(2)
-    driver.refresh() # без рефреша в автотесте не работает поиск. иногда не работает и с ним. нужно водить мышью по экрану
-    driver.refresh()
+    time.sleep(3)
+    action = ActionChains(driver)
+    action.move_by_offset(100, 100).perform()
+
     catalog_search = Catalog_search_page(driver)
     catalog_search.first_product_click()
 

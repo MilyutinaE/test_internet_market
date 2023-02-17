@@ -14,10 +14,14 @@ from pages_and_components.pages.main_page import Main_page
 from pages_and_components.pages.product_page import Product_page
 
 
-@allure.description("test_items_on_product_page - Открывается сайт, в левом меню клик на категорию, далее открывается первый товар в категории, "
+@allure.description("test_items_on_product_page - Открывается сайт, в левом меню клик на категорию, "
+                    "далее открывается первый товар в категории, "
                     "проверяется есть ли у товара картинка, цена, рейтинг")
 def test_items_on_product_page(set_up):
     options = webdriver.ChromeOptions()
+    options.add_argument('--ignore-certificate-errors-spki-list')
+    options.add_argument('--ignore-ssl-errors')
+    options.add_argument('log-level=3') # чтобы не было ошибок в консоли
     options.add_experimental_option("detach", True)
     g = Service('D:\\pythonProject\\chromedriver.exe')
     driver = webdriver.Chrome(options=options, service=g)

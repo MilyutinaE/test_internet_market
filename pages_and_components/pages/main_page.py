@@ -11,7 +11,7 @@ class Main_page(Base):
         super().__init__(driver)
         self.driver = driver
         # Локаторы
-        self.left_menu_toothbrush =  (By.XPATH, "//*[@class='category-item_text' and contains(text(),'Зубные щетки')]")
+        self.left_menu_toothbrush = (By.XPATH, "//*[@class='category-item_text' and contains(text(),'Зубные щетки')]")
 
 
     url = 'https://doctorslon.ru/'
@@ -22,7 +22,6 @@ class Main_page(Base):
         _login_btn = self.driver.find_element(*self.left_menu_toothbrush)
         _login_btn.click()
         print("Click left menu toothbrush")
-
 
 
     def open_main_link(self):
